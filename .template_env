@@ -15,3 +15,12 @@ DW_DB_PORT=5432
 DW_DB_USER=postgres
 DW_DB_PASSWORD=yourpassword
 DW_DB_NAME=converse_dw
+
+# buat asumsi lokasi skema atau DB yang dipakai sama
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=welcomeeverynyan
+DB_PASSWORD=yourpassword
+
+OLTP_DB=converse_oltp
+DW_DB=converse_dw
