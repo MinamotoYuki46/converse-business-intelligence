@@ -1,6 +1,6 @@
 # Converse OLTP-DW-ETL
-Name : Muhammad Fauzan Ahsani
-ID: 2310817310009
+Name : Muhammad Fauzan Ahsani <br>
+ID: 2310817310009 <br>
 Course: Business Intelligence
 
 こんばんは。このレポは、is about OLTP, data warehouse and ETL on Converse online store. 
