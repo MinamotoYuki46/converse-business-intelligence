@@ -1,0 +1,28 @@
+{
+  "name": "converse-business-intelligence",
+  "version": "1.0.0",
+  "description": "こんばんは。このレポは、is about OLTP and ETL on Converse online store.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MinamotoYuki46/converse-business-intelligence.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MinamotoYuki46/converse-business-intelligence/issues"
+  },
+  "homepage": "https://github.com/MinamotoYuki46/converse-business-intelligence#readme",
+  "dependencies": {
+    "@types/node": "^24.7.0",
+    "dotenv": "^17.2.3",
+    "mysql2": "^3.15.1",
+    "pg": "^8.16.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

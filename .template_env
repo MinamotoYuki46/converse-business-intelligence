@@ -1,0 +1,17 @@
+# template dibuat dengan asumsi database nya adalah postgres
+# ubah sesuai keperluan
+
+
+# buat oltp
+OLTP_DB_HOST=localhost
+OLTP_DB_PORT=5432
+OLTP_DB_USER=postgres
+OLTP_DB_PASSWORD=yourpassword
+OLTP_DB_NAME=converse_oltp
+
+# buat data warehouse nya
+DW_DB_HOST=localhost
+DW_DB_PORT=5432
+DW_DB_USER=postgres
+DW_DB_PASSWORD=yourpassword
+DW_DB_NAME=converse_dw
