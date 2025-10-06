@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `addresses` (
   CONSTRAINT `addresses_ibfk_1` FOREIGN KEY (`id_customer`) REFERENCES `customers` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_oltp.addresses: ~10 rows (approximately)
+-- Dumping data for table converse_oltp.addresses: ~0 rows (approximately)
 INSERT INTO `addresses` (`id`, `id_customer`, `label`, `line`, `city`, `state`, `region`, `country`, `postal_code`, `is_default`, `created_at`) VALUES
 	(1, 1, 'Home', 'Jl. Merdeka No.1', 'Jakarta', 'DKI Jakarta', 'Jabodetabek', 'Indonesia', '10110', 1, '2025-10-06 13:56:52'),
 	(2, 2, 'Office', 'Jl. Asia Afrika 10', 'Bandung', 'Jawa Barat', 'Jawa Barat', 'Indonesia', '40211', 1, '2025-10-06 13:56:52'),
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `carts` (
   CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`id_customer`) REFERENCES `customers` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_oltp.carts: ~10 rows (approximately)
+-- Dumping data for table converse_oltp.carts: ~0 rows (approximately)
 INSERT INTO `carts` (`id`, `id_customer`, `created_at`, `updated_at`) VALUES
 	(1, 1, '2025-10-06 13:56:52', '2025-10-06 13:56:52'),
 	(2, 2, '2025-10-06 13:56:52', '2025-10-06 13:56:52'),
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `cart_items` (
   CONSTRAINT `cart_items_ibfk_2` FOREIGN KEY (`id_product_variants`) REFERENCES `product_variants` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_oltp.cart_items: ~10 rows (approximately)
+-- Dumping data for table converse_oltp.cart_items: ~0 rows (approximately)
 INSERT INTO `cart_items` (`id`, `id_carts`, `id_product_variants`, `quantity`, `added_at`) VALUES
 	(1, 1, 1, 1, '2025-10-06 13:56:52'),
 	(2, 2, 2, 1, '2025-10-06 13:56:52'),
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   CONSTRAINT `categories_ibfk_1` FOREIGN KEY (`id_parent`) REFERENCES `categories` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_oltp.categories: ~10 rows (approximately)
+-- Dumping data for table converse_oltp.categories: ~0 rows (approximately)
 INSERT INTO `categories` (`id`, `name`, `id_parent`, `description`, `created_at`, `updated_at`) VALUES
 	(1, 'Sneakers', NULL, NULL, '2025-10-06 13:56:52', '2025-10-06 13:56:52'),
 	(2, 'High-Tops', 1, NULL, '2025-10-06 13:56:52', '2025-10-06 13:56:52'),
@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_oltp.customers: ~10 rows (approximately)
+-- Dumping data for table converse_oltp.customers: ~0 rows (approximately)
 INSERT INTO `customers` (`id`, `full_name`, `email`, `password_hash`, `phone`, `gender`, `created_at`, `updated_at`) VALUES
 	(1, 'Ahmad Kasim', 'akasim@yahoo.com', 'hash1', '081234567800', 'M', '2025-10-06 13:56:52', '2025-10-06 14:44:14'),
 	(2, 'Bianca Waterson', 'biancaw@gmail.com', 'hash2', '081234567801', 'F', '2025-10-06 13:56:52', '2025-10-06 14:45:00'),
@@ -154,32 +154,11 @@ INSERT INTO `customers` (`id`, `full_name`, `email`, `password_hash`, `phone`, `
 	(9, 'Park Ji Sung', 'pjisung@samsung.com', 'hash9', '081234567808', 'M', '2025-10-06 13:56:52', '2025-10-06 14:44:27'),
 	(10, 'Lionel Messi', 'messi@apple.com', 'hash10', '081234567809', 'M', '2025-10-06 13:56:52', '2025-10-06 14:44:28');
 
--- Dumping structure for table converse_oltp.inventory_locations
-CREATE TABLE IF NOT EXISTS `inventory_locations` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `address` text,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Dumping data for table converse_oltp.inventory_locations: ~10 rows (approximately)
-INSERT INTO `inventory_locations` (`id`, `name`, `address`, `created_at`) VALUES
-	(1, 'Jakarta Warehouse', 'Jl. Industri No.1, Jakarta', '2025-10-06 13:56:52'),
-	(2, 'Bandung Warehouse', 'Jl. Soekarno Hatta No.9, Bandung', '2025-10-06 13:56:52'),
-	(3, 'Surabaya Warehouse', 'Jl. Rungkut No.2, Surabaya', '2025-10-06 13:56:52'),
-	(4, 'Medan Hub', 'Jl. Krakatau 7, Medan', '2025-10-06 13:56:52'),
-	(5, 'Bali Hub', 'Jl. ByPass Ngurah Rai 88, Denpasar', '2025-10-06 13:56:52'),
-	(6, 'Yogyakarta Store', 'Jl. Kaliurang 17, Yogya', '2025-10-06 13:56:52'),
-	(7, 'Makassar Hub', 'Jl. Pettarani 22, Makassar', '2025-10-06 13:56:52'),
-	(8, 'Semarang Store', 'Jl. Pemuda 33, Semarang', '2025-10-06 13:56:52'),
-	(9, 'Palembang Store', 'Jl. Merdeka 9, Palembang', '2025-10-06 13:56:52'),
-	(10, 'Malang Warehouse', 'Jl. Sumbersari 5, Malang', '2025-10-06 13:56:52');
-
 -- Dumping structure for table converse_oltp.orders
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_customer` int NOT NULL,
+  `id_promotion` int DEFAULT NULL,
   `id_billing_address` int DEFAULT NULL,
   `id_shipping_address` int DEFAULT NULL,
   `status` varchar(30) DEFAULT 'pending',
@@ -195,23 +174,24 @@ CREATE TABLE IF NOT EXISTS `orders` (
   CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`id_shipping_address`) REFERENCES `addresses` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_oltp.orders: ~10 rows (approximately)
-INSERT INTO `orders` (`id`, `id_customer`, `id_billing_address`, `id_shipping_address`, `status`, `total`, `created_at`, `updated_at`) VALUES
-	(1, 1, 1, 1, 'paid', 799000.00, '2025-10-06 13:56:53', '2025-10-06 13:56:53'),
-	(2, 2, 2, 2, 'paid', 749000.00, '2025-10-06 13:56:53', '2025-10-06 13:56:53'),
-	(3, 3, 3, 3, 'paid', 849000.00, '2025-10-06 13:56:53', '2025-10-06 13:56:53'),
-	(4, 4, 4, 4, 'shipped', 1150000.00, '2025-10-06 13:56:53', '2025-10-06 13:56:53'),
-	(5, 5, 5, 5, 'paid', 649000.00, '2025-10-06 13:56:53', '2025-10-06 13:56:53'),
-	(6, 6, 6, 6, 'paid', 829000.00, '2025-10-06 13:56:53', '2025-10-06 13:56:53'),
-	(7, 7, 7, 7, 'paid', 950000.00, '2025-10-06 13:56:53', '2025-10-06 13:56:53'),
-	(8, 8, 8, 8, 'paid', 999000.00, '2025-10-06 13:56:53', '2025-10-06 13:56:53'),
-	(9, 9, 9, 9, 'paid', 1290000.00, '2025-10-06 13:56:53', '2025-10-06 13:56:53'),
-	(10, 10, 10, 10, 'paid', 799000.00, '2025-10-06 13:56:53', '2025-10-06 13:56:53');
+-- Dumping data for table converse_oltp.orders: ~0 rows (approximately)
+INSERT INTO `orders` (`id`, `id_customer`, `id_promotion`, `id_billing_address`, `id_shipping_address`, `status`, `total`, `created_at`, `updated_at`) VALUES
+	(1, 1, 1, 1, 1, 'paid', 799000.00, '2025-10-06 13:56:53', '2025-10-06 15:50:51'),
+	(2, 2, NULL, 2, 2, 'paid', 749000.00, '2025-10-06 13:56:53', '2025-10-06 18:14:08'),
+	(3, 3, NULL, 3, 3, 'paid', 849000.00, '2025-10-06 13:56:53', '2025-10-06 18:14:11'),
+	(4, 4, NULL, 4, 4, 'shipped', 1150000.00, '2025-10-06 13:56:53', '2025-10-06 18:14:12'),
+	(5, 5, 4, 5, 5, 'paid', 649000.00, '2025-10-06 13:56:53', '2025-10-06 18:13:34'),
+	(6, 6, NULL, 6, 6, 'paid', 829000.00, '2025-10-06 13:56:53', '2025-10-06 18:14:20'),
+	(7, 7, NULL, 7, 7, 'paid', 950000.00, '2025-10-06 13:56:53', '2025-10-06 18:14:19'),
+	(8, 8, NULL, 8, 8, 'paid', 999000.00, '2025-10-06 13:56:53', '2025-10-06 18:14:13'),
+	(9, 9, NULL, 9, 9, 'paid', 1290000.00, '2025-10-06 13:56:53', '2025-10-06 18:14:15'),
+	(10, 10, 2, 10, 10, 'paid', 799000.00, '2025-10-06 13:56:53', '2025-10-06 18:14:17');
 
 -- Dumping structure for table converse_oltp.order_items
 CREATE TABLE IF NOT EXISTS `order_items` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_order` int NOT NULL,
+  `id_product` int DEFAULT NULL,
   `id_variant_products` int NOT NULL,
   `sku` varchar(100) DEFAULT NULL,
   `quantity` int NOT NULL,
@@ -221,22 +201,24 @@ CREATE TABLE IF NOT EXISTS `order_items` (
   PRIMARY KEY (`id`),
   KEY `idx_orderitems_order` (`id_order`),
   KEY `idx_orderitems_variant` (`id_variant_products`),
+  KEY `id_product` (`id_product`),
   CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`id_order`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`id_variant_products`) REFERENCES `product_variants` (`id`)
+  CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`id_variant_products`) REFERENCES `product_variants` (`id`),
+  CONSTRAINT `order_items_ibfk_3` FOREIGN KEY (`id_product`) REFERENCES `products` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_oltp.order_items: ~10 rows (approximately)
-INSERT INTO `order_items` (`id`, `id_order`, `id_variant_products`, `sku`, `quantity`, `unit_price`, `created_at`) VALUES
-	(1, 1, 1, 'CT-HI-WHT-40', 1, 799000.00, '2025-10-06 13:56:53'),
-	(2, 2, 3, 'CT-LOW-RED-42', 1, 749000.00, '2025-10-06 13:56:53'),
-	(3, 3, 4, 'OS-YLW-41', 1, 849000.00, '2025-10-06 13:56:53'),
-	(4, 4, 5, 'RSH-GRN-40', 1, 1150000.00, '2025-10-06 13:56:53'),
-	(5, 5, 6, 'AS-SANDAL-39', 1, 649000.00, '2025-10-06 13:56:53'),
-	(6, 6, 7, 'JP-BLU-42', 1, 829000.00, '2025-10-06 13:56:53'),
-	(7, 7, 8, 'CST-HI-CST1', 1, 950000.00, '2025-10-06 13:56:53'),
-	(8, 8, 9, 'BT-BRN-43', 1, 999000.00, '2025-10-06 13:56:53'),
-	(9, 9, 10, 'TKY-RED-41', 1, 1290000.00, '2025-10-06 13:56:53'),
-	(10, 10, 2, 'CT-HI-BLK-41', 1, 799000.00, '2025-10-06 13:56:53');
+-- Dumping data for table converse_oltp.order_items: ~0 rows (approximately)
+INSERT INTO `order_items` (`id`, `id_order`, `id_product`, `id_variant_products`, `sku`, `quantity`, `unit_price`, `created_at`) VALUES
+	(1, 1, 1, 1, 'CT-HI-WHT-40', 1, 799000.00, '2025-10-06 13:56:53'),
+	(2, 2, 2, 3, 'CT-LOW-RED-42', 1, 749000.00, '2025-10-06 13:56:53'),
+	(3, 3, 3, 4, 'OS-YLW-41', 1, 849000.00, '2025-10-06 13:56:53'),
+	(4, 4, 4, 5, 'RSH-GRN-40', 1, 1150000.00, '2025-10-06 13:56:53'),
+	(5, 5, 5, 6, 'AS-SANDAL-39', 1, 649000.00, '2025-10-06 13:56:53'),
+	(6, 6, 6, 7, 'JP-BLU-42', 1, 829000.00, '2025-10-06 13:56:53'),
+	(7, 7, 7, 8, 'CST-HI-CST1', 1, 950000.00, '2025-10-06 13:56:53'),
+	(8, 8, 8, 9, 'BT-BRN-43', 1, 999000.00, '2025-10-06 13:56:53'),
+	(9, 9, 9, 10, 'TKY-RED-41', 1, 1290000.00, '2025-10-06 13:56:53'),
+	(10, 10, 1, 2, 'CT-HI-BLK-41', 1, 799000.00, '2025-10-06 13:56:53');
 
 -- Dumping structure for table converse_oltp.payments
 CREATE TABLE IF NOT EXISTS `payments` (
@@ -252,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `payments` (
   CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`id_order`) REFERENCES `orders` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_oltp.payments: ~10 rows (approximately)
+-- Dumping data for table converse_oltp.payments: ~0 rows (approximately)
 INSERT INTO `payments` (`id`, `id_order`, `amount`, `method`, `status`, `provider_reference`, `created_at`) VALUES
 	(1, 1, 799000.00, 'credit_card', 'completed', 'TX1001', '2025-10-06 13:56:53'),
 	(2, 2, 749000.00, 'credit_card', 'completed', 'TX1002', '2025-10-06 13:56:53'),
@@ -280,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `categories` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_oltp.products: ~10 rows (approximately)
+-- Dumping data for table converse_oltp.products: ~0 rows (approximately)
 INSERT INTO `products` (`id`, `name`, `brand`, `id_category`, `description`, `is_active`, `created_at`, `updated_at`) VALUES
 	(1, 'Chuck Taylor High', 'Converse', 2, 'Classic high-top', 1, '2025-10-06 13:56:52', '2025-10-06 13:56:52'),
 	(2, 'Chuck Taylor Low', 'Converse', 3, 'Classic low-top', 1, '2025-10-06 13:56:52', '2025-10-06 13:56:52'),
@@ -312,7 +294,7 @@ CREATE TABLE IF NOT EXISTS `product_variants` (
   CONSTRAINT `product_variants_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_oltp.product_variants: ~10 rows (approximately)
+-- Dumping data for table converse_oltp.product_variants: ~0 rows (approximately)
 INSERT INTO `product_variants` (`id`, `id_product`, `name`, `sku`, `size`, `colour`, `mrsp`, `price`, `created_at`, `updated_at`) VALUES
 	(1, 1, 'Chuck High White 40', 'CT-HI-WHT-40', '40', 'White', 850000.00, 799000.00, '2025-10-06 13:56:52', '2025-10-06 13:56:52'),
 	(2, 1, 'Chuck High Black 41', 'CT-HI-BLK-41', '41', 'Black', 850000.00, 799000.00, '2025-10-06 13:56:52', '2025-10-06 13:56:52'),
@@ -339,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `promotions` (
   CONSTRAINT `promotions_chk_1` CHECK ((`discount_percent` between 0 and 100))
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_oltp.promotions: ~10 rows (approximately)
+-- Dumping data for table converse_oltp.promotions: ~0 rows (approximately)
 INSERT INTO `promotions` (`id`, `code`, `description`, `discount_percent`, `active`, `valid_from`, `valid_to`) VALUES
 	(1, 'DISC5', '5% off selected shoes', 5.00, 1, '2025-10-01', '2025-10-31'),
 	(2, 'DISC10', '10% sitewide', 10.00, 1, '2025-09-01', '2025-12-31'),
@@ -365,7 +347,7 @@ CREATE TABLE IF NOT EXISTS `returns` (
   CONSTRAINT `returns_ibfk_1` FOREIGN KEY (`id_order_item`) REFERENCES `order_items` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_oltp.returns: ~3 rows (approximately)
+-- Dumping data for table converse_oltp.returns: ~0 rows (approximately)
 INSERT INTO `returns` (`id`, `id_order_item`, `reason`, `quantity`, `status`, `created_at`) VALUES
 	(1, 1, 'Size too small', 1, 'approved', '2025-10-06 13:56:53'),
 	(2, 3, 'Defective item', 1, 'pending', '2025-10-06 13:56:53'),
@@ -385,7 +367,7 @@ CREATE TABLE IF NOT EXISTS `shipments` (
   CONSTRAINT `shipments_ibfk_1` FOREIGN KEY (`id_order`) REFERENCES `orders` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_oltp.shipments: ~10 rows (approximately)
+-- Dumping data for table converse_oltp.shipments: ~0 rows (approximately)
 INSERT INTO `shipments` (`id`, `id_order`, `carrier`, `tracking_number`, `status`, `shipped_at`, `delivered_at`) VALUES
 	(1, 1, 'JNE', 'JNE123456', 'delivered', '2025-10-06 13:56:53', '2025-10-06 13:56:53'),
 	(2, 2, 'J&T', 'JT222333', 'delivered', '2025-10-06 13:56:53', '2025-10-06 13:56:53'),

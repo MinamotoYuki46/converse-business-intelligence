@@ -1,4 +1,6 @@
-export function transformDimensions(raw: any[], mapping: Record<string, string>) {
+import { RowDataPacket } from "mysql2";
+
+export function transformDimensions(raw: RowDataPacket[], mapping: Record<string, string>) {
     return raw.map(row => {
         const transformed: any = {};
         for (const [targetKey, sourceKey] of Object.entries(mapping)) {
@@ -8,7 +10,7 @@ export function transformDimensions(raw: any[], mapping: Record<string, string>)
     });
 }
 
-export function transformFacts(raw: any[], mapping: Record<string, string>, extraFields: Record<string, any> = {}) {
+export function transformFacts(raw: RowDataPacket[], mapping: Record<string, string>, extraFields: Record<string, any> = {}) {
     return raw.map(row => {
         const transformed: any = {};
         for (const [targetKey, sourceKey] of Object.entries(mapping)) {

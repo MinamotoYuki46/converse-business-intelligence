@@ -16,26 +16,23 @@
 
 
 -- Dumping database structure for converse_dw
-CREATE DATABASE IF NOT EXISTS `converse_dw` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE IF NOT EXISTS `converse_dw` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `converse_dw`;
 
 -- Dumping structure for table converse_dw.dim_customer
 CREATE TABLE IF NOT EXISTS `dim_customer` (
   `key_customer` int NOT NULL AUTO_INCREMENT,
-  `id_customer` int DEFAULT NULL,
   `full_name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
+  `gender` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `city` varchar(100) DEFAULT NULL,
   `region` varchar(100) DEFAULT NULL,
   `country` varchar(100) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `gender` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`key_customer`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Dumping data for table converse_dw.dim_customer: ~0 rows (approximately)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping structure for table converse_dw.dim_date
 CREATE TABLE IF NOT EXISTS `dim_date` (
@@ -49,38 +46,24 @@ CREATE TABLE IF NOT EXISTS `dim_date` (
   PRIMARY KEY (`key_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_dw.dim_date: ~0 rows (approximately)
-
--- Dumping structure for table converse_dw.dim_inventory_location
-CREATE TABLE IF NOT EXISTS `dim_inventory_location` (
-  `key_location` int NOT NULL AUTO_INCREMENT,
-  `id_location` int DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `city` varchar(100) DEFAULT NULL,
-  `region` varchar(100) DEFAULT NULL,
-  `country` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`key_location`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Dumping data for table converse_dw.dim_inventory_location: ~0 rows (approximately)
 
 -- Dumping structure for table converse_dw.dim_payment
 CREATE TABLE IF NOT EXISTS `dim_payment` (
   `key_payment` int NOT NULL AUTO_INCREMENT,
-  `id_payment` int DEFAULT NULL,
   `method` varchar(100) DEFAULT NULL,
   `status` varchar(100) DEFAULT NULL,
   `provider_reference` varchar(255) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`key_payment`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_dw.dim_payment: ~0 rows (approximately)
 
 -- Dumping structure for table converse_dw.dim_product
 CREATE TABLE IF NOT EXISTS `dim_product` (
   `key_product` int NOT NULL AUTO_INCREMENT,
   `id_product` int DEFAULT NULL,
-  `product_name` varchar(255) DEFAULT NULL,
+  `id_variant` int DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `category` varchar(100) DEFAULT NULL,
   `brand` varchar(100) DEFAULT NULL,
   `color` varchar(50) DEFAULT NULL,
@@ -88,14 +71,11 @@ CREATE TABLE IF NOT EXISTS `dim_product` (
   `price` decimal(10,2) DEFAULT NULL,
   `is_active` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`key_product`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Dumping data for table converse_dw.dim_product: ~0 rows (approximately)
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping structure for table converse_dw.dim_promotion
 CREATE TABLE IF NOT EXISTS `dim_promotion` (
   `key_promotion` int NOT NULL AUTO_INCREMENT,
-  `id_promotion` int DEFAULT NULL,
   `code` varchar(50) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `discount_percent` decimal(5,2) DEFAULT NULL,
@@ -103,95 +83,45 @@ CREATE TABLE IF NOT EXISTS `dim_promotion` (
   `valid_from` date DEFAULT NULL,
   `valid_to` date DEFAULT NULL,
   PRIMARY KEY (`key_promotion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_dw.dim_promotion: ~0 rows (approximately)
 
 -- Dumping structure for table converse_dw.dim_shipment
 CREATE TABLE IF NOT EXISTS `dim_shipment` (
   `key_shipment` int NOT NULL AUTO_INCREMENT,
-  `id_shipment` int DEFAULT NULL,
   `carrier` varchar(100) DEFAULT NULL,
   `tracking_number` varchar(255) DEFAULT NULL,
   `status` varchar(100) DEFAULT NULL,
   `shipped_date` date DEFAULT NULL,
   `delivered_date` date DEFAULT NULL,
   PRIMARY KEY (`key_shipment`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_dw.dim_shipment: ~0 rows (approximately)
-
--- Dumping structure for table converse_dw.fact_inventory_movement
-CREATE TABLE IF NOT EXISTS `fact_inventory_movement` (
-  `id_fact_inventory` int NOT NULL AUTO_INCREMENT,
-  `key_product` int DEFAULT NULL,
-  `key_location` int DEFAULT NULL,
-  `key_date` int DEFAULT NULL,
-  `movement_type` enum('IN','OUT','RETURN','RESTOCK') DEFAULT NULL,
-  `quantity` int DEFAULT NULL,
-  `remarks` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id_fact_inventory`),
-  KEY `key_product` (`key_product`),
-  KEY `key_date` (`key_date`),
-  KEY `fk_fact_inventory_location` (`key_location`),
-  CONSTRAINT `fk_fact_inventory_date` FOREIGN KEY (`key_date`) REFERENCES `dim_date` (`key_date`),
-  CONSTRAINT `fk_fact_inventory_location` FOREIGN KEY (`key_location`) REFERENCES `dim_inventory_location` (`key_location`),
-  CONSTRAINT `fk_fact_inventory_product` FOREIGN KEY (`key_product`) REFERENCES `dim_product` (`key_product`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Dumping data for table converse_dw.fact_inventory_movement: ~0 rows (approximately)
-
--- Dumping structure for table converse_dw.fact_promotions
-CREATE TABLE IF NOT EXISTS `fact_promotions` (
-  `id_fact_promotion` int NOT NULL AUTO_INCREMENT,
-  `id_promotion` int DEFAULT NULL,
-  `key_promotion` int DEFAULT NULL,
-  `id_order` int DEFAULT NULL,
-  `key_product` int DEFAULT NULL,
-  `key_customer` int DEFAULT NULL,
-  `key_applied_date` int DEFAULT NULL,
-  `discount_percent` decimal(5,2) DEFAULT NULL,
-  `discount_amount` decimal(10,2) DEFAULT NULL,
-  PRIMARY KEY (`id_fact_promotion`),
-  KEY `key_promotion` (`key_promotion`),
-  KEY `key_product` (`key_product`),
-  KEY `key_applied_date` (`key_applied_date`),
-  KEY `fk_fact_promotions_customer` (`key_customer`),
-  CONSTRAINT `fk_fact_promotions_customer` FOREIGN KEY (`key_customer`) REFERENCES `dim_customer` (`key_customer`),
-  CONSTRAINT `fk_fact_promotions_date` FOREIGN KEY (`key_applied_date`) REFERENCES `dim_date` (`key_date`),
-  CONSTRAINT `fk_fact_promotions_product` FOREIGN KEY (`key_product`) REFERENCES `dim_product` (`key_product`),
-  CONSTRAINT `fk_fact_promotions_promo` FOREIGN KEY (`key_promotion`) REFERENCES `dim_promotion` (`key_promotion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Dumping data for table converse_dw.fact_promotions: ~0 rows (approximately)
 
 -- Dumping structure for table converse_dw.fact_returns
 CREATE TABLE IF NOT EXISTS `fact_returns` (
-  `id_fact_return` int NOT NULL AUTO_INCREMENT,
-  `id_return` int DEFAULT NULL,
+  `key_return` int NOT NULL AUTO_INCREMENT,
   `id_order_item` int DEFAULT NULL,
   `key_customer` int DEFAULT NULL,
   `key_product` int DEFAULT NULL,
-  `key_return_date` int DEFAULT NULL,
+  `key_date` int DEFAULT NULL,
   `quantity` int DEFAULT NULL,
   `reason` varchar(255) DEFAULT NULL,
   `status` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_fact_return`),
+  PRIMARY KEY (`key_return`) USING BTREE,
   KEY `key_product` (`key_product`),
-  KEY `key_return_date` (`key_return_date`),
   KEY `fk_fact_returns_customer` (`key_customer`),
+  KEY `key_return_date` (`key_date`) USING BTREE,
   CONSTRAINT `fk_fact_returns_customer` FOREIGN KEY (`key_customer`) REFERENCES `dim_customer` (`key_customer`),
-  CONSTRAINT `fk_fact_returns_date` FOREIGN KEY (`key_return_date`) REFERENCES `dim_date` (`key_date`),
+  CONSTRAINT `fk_fact_returns_date` FOREIGN KEY (`key_date`) REFERENCES `dim_date` (`key_date`),
   CONSTRAINT `fk_fact_returns_product` FOREIGN KEY (`key_product`) REFERENCES `dim_product` (`key_product`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_dw.fact_returns: ~0 rows (approximately)
 
 -- Dumping structure for table converse_dw.fact_sales
 CREATE TABLE IF NOT EXISTS `fact_sales` (
-  `id_fact_sales` int NOT NULL AUTO_INCREMENT,
-  `id_order` int DEFAULT NULL,
-  `id_order_item` int DEFAULT NULL,
+  `key_sales` int NOT NULL AUTO_INCREMENT,
+  `id_order` int NOT NULL,
   `key_customer` int DEFAULT NULL,
   `key_product` int DEFAULT NULL,
   `key_payment` int DEFAULT NULL,
@@ -199,24 +129,22 @@ CREATE TABLE IF NOT EXISTS `fact_sales` (
   `key_order_date` int DEFAULT NULL,
   `key_promotion` int DEFAULT NULL,
   `quantity` int DEFAULT NULL,
+  `discount_percentage` decimal(10,2) DEFAULT NULL,
   `unit_price` decimal(10,2) DEFAULT NULL,
-  `subtotal` decimal(12,2) DEFAULT NULL,
-  PRIMARY KEY (`id_fact_sales`),
+  `total_amount` decimal(12,2) DEFAULT NULL,
+  PRIMARY KEY (`key_sales`) USING BTREE,
   KEY `key_product` (`key_product`),
   KEY `key_customer` (`key_customer`),
   KEY `key_order_date` (`key_order_date`),
   KEY `fk_fact_sales_payment` (`key_payment`),
   KEY `fk_fact_sales_shipment` (`key_shipment`),
-  KEY `fk_fact_sales_promotion` (`key_promotion`),
   CONSTRAINT `fk_fact_sales_customer` FOREIGN KEY (`key_customer`) REFERENCES `dim_customer` (`key_customer`),
   CONSTRAINT `fk_fact_sales_date` FOREIGN KEY (`key_order_date`) REFERENCES `dim_date` (`key_date`),
   CONSTRAINT `fk_fact_sales_payment` FOREIGN KEY (`key_payment`) REFERENCES `dim_payment` (`key_payment`),
   CONSTRAINT `fk_fact_sales_product` FOREIGN KEY (`key_product`) REFERENCES `dim_product` (`key_product`),
-  CONSTRAINT `fk_fact_sales_promotion` FOREIGN KEY (`key_promotion`) REFERENCES `dim_promotion` (`key_promotion`),
   CONSTRAINT `fk_fact_sales_shipment` FOREIGN KEY (`key_shipment`) REFERENCES `dim_shipment` (`key_shipment`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table converse_dw.fact_sales: ~0 rows (approximately)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -10,4 +10,4 @@ async function main() {
     console.log("ETL process completed.");
 }
 
-main().catch(err => console.error("❌ ETL failed:", err));
+main().catch(err => console.error("ETL failed:", err));

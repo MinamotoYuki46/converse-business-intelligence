@@ -1,6 +1,5 @@
 export interface FactReturns {
-    id_fact_return: number;
-    id_return: number;
+    key_return: number;
     id_order_item: number;
     key_customer: number;
     key_date: number;

@@ -1,6 +1,7 @@
 export interface OrderItem {
     id: number;
     id_order: number;
+    id_products: number;
     id_variant_products: number;
     sku: string;
     quantity: number;

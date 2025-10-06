@@ -1,6 +1,5 @@
 export interface DimPromotion {
     key_promotion: number;
-    id_promotion: number;
     code: string;
     description: string;
     discount_percent: number;
